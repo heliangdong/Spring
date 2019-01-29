@@ -21,7 +21,11 @@ public class UserController {
      * @return
      */
     public List<User> getuserlist(){
-        return userRepository.listUser();
+        List<User> users = new ArrayList<>();
+        for (User user : userRepository.findAll()) {
+            users.add(user);
+        }
+        return users;
     }
 
     @GetMapping
@@ -31,19 +35,44 @@ public class UserController {
         return  new ModelAndView("users/list","userModel",model);
     }
 
-    //获取form
     @GetMapping("/form")
-    public ModelAndView getform(Model model){
-        model.addAttribute("user",new User());
-        model.addAttribute("title","创建用户");
-        return new ModelAndView("users/form","userModel",model);
+    public ModelAndView createForm(Model model) {
+        model.addAttribute("user", new User(null, null));
+        model.addAttribute("title", "创建用户");
+        return new ModelAndView("users/form", "userModel", model);
     }
 
-    //创建新用户
     @PostMapping
     public ModelAndView createuser(User user){
-        user=userRepository.saveupdateuser(user)    ;
-        return new ModelAndView("redirect:/users");
+        userRepository.save(user);
+        return new ModelAndView("redirect:users");
+    }
+
+    //根据用户ID，获取用户信息
+
+    @GetMapping("{id}")
+    public ModelAndView view(@PathVariable("id") Long id, Model model) {
+        User user = userRepository.findOne(id);
+        model.addAttribute("user", user);
+        model.addAttribute("title", "查看用户");
+        return new ModelAndView("users/view", "userModel", model);
+    }
+
+    //删除用户
+    @GetMapping("delete/{id}")
+    public ModelAndView deleteuser(@PathVariable("id") Long id, Model model){
+        userRepository.delete(id);
+        model.addAttribute("userList", getuserlist());
+        model.addAttribute("title", "删除用户");
+        return new ModelAndView("users/list", "userModel", model);
+    }
+
+    @GetMapping("modify/{id}")
+    public ModelAndView updateuser(@PathVariable("id") Long id, Model model){
+        User user=userRepository.findOne(id);
+        model.addAttribute("user",user);
+        model.addAttribute("title","修改用户");
+        return new ModelAndView("users/form", "userModel", model);
     }
 
 

@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.springframework.org/schema/data/jaxb">
-<head>
-    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
-    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/css/default.css}" rel="stylesheet"/>
-    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
-    <meta charset="UTF-8"/>
-    <title>书籍列表</title>
+<head th:replace="~{fragments/header :: header}">
 </head>
 <body>
-        <a href="/users/form.html">创建用户</a>
-        <table>
+
+<div class="container">
+    <div class="row">
+
+        <h2 th:text="${userModel.title}">Welcome
+            to waylau.com</h2>
+
+    </div><!-- /.row -->
+
+
+    <div class="row">
+        <p>
+            <a class="btn btn-primary" href="/users/form.html" role="button">创建用户</a>
+        </p>
+    </div><!-- /.row -->
+
+    <div class="row">
+        <table class="table table-hover">
             <tr>
                 <td>ID</td>
                 <td>名字</td>
@@ -18,9 +28,14 @@
             </tr>
             <tr th:each="user:${userModel.userList}">
                 <td th:text="${user.id}">11</td>
-                <td th:text="${user.name}">12</td>
+                <td><a th:href="@{'/users/'+${user.id}}"
+                       th:text="${user.name}">waylau</a></td>
                 <td th:text="${user.age}">13</td>
             </tr>
+
+            <div th:replace="~{fragments/footer :: footer}">...</div>
         </table>
+    </div>
+</div>
 </body>
 </html>

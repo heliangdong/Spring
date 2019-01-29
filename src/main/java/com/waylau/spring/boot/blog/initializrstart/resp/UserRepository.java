@@ -1,18 +1,13 @@
 package com.waylau.spring.boot.blog.initializrstart.resp;
 
 import com.waylau.spring.boot.blog.initializrstart.domain.User;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepository extends CrudRepository<User,Long> {
 
 
 
-    /**
-     * 获取所有用户的列表
-     * @return
-     */
-    List<User> listUser();
 
-    User saveupdateuser(User user);
 }
