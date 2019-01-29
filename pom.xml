@@ -16,7 +16,14 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+
+		<thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
+		<thymeleaf-layout-dialect.version>2.2.0</thymeleaf-layout-dialect.version>
 	</properties>
+
+
+
+
 
 	<dependencies>
 		<dependency>
@@ -40,6 +47,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+
+
 
 
 

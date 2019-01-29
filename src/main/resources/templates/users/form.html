@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <meta charset="UTF-8"/>
+    <title>书籍列表</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">...</div>
+<h3 th:text="${userModel.title}">Welcome to waylau.com</h3>
+<div>
+    <a href="/users">返回主页</a>
+</div>
+
+<form action="/users" method="post" th:object="${userModel.user}">
+    <input type="hidden" name="id"  th:value="*{id}">
+    名字:<br>
+    <input type="text" name="name"  th:value="*{name}">
+    年龄:<br>
+    <input type="text" name="age"  th:value="*{age}">
+    <input type="submit" value="提交">
+</form>
+
+
+<div th:replace="~{fragments/footer :: footer}">...</div>
+</body>
+</html>
